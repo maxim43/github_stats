@@ -18,8 +18,10 @@ module GithubUserStatistics
                         .new(stats_collector: stats_collector)
                         .get_stats_per_user
 
-      users_stats.each do |users_stat|
-        GithubUserStatistics::Create.new(users_stat, from_date.to_date).perform!
+      ActiveRecord::Base.transaction do
+        users_stats.each do |users_stat|
+          GithubUserStatistics::Create.new(users_stat, from_date.to_date).perform!
+        end
       end
     end
   end

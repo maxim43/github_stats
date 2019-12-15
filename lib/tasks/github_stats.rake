@@ -23,8 +23,8 @@ namespace :github_stats do
 
   task recurrent: :environment do
     GithubUserStatistics::CollectStatsForDateRange.new(
-        from_date: DateTime.current.beginning_of_week - 1.week,
-        to_date: DateTime.current
+        from_date: UserStat.user_stats_date_from,
+        to_date:   UserStat.user_stats_date_to
     ).perform!
   end
 end

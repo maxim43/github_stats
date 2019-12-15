@@ -6,7 +6,7 @@ module Github
     # SUGGESTION: Get all pull more then one week duration
     class StatsCollector
 
-      DEFAULT_REPO_NAME = "rails/rails"
+      DEFAULT_REPO_NAME = "MaksymTo/tamagotchi"
 
       attr_reader :from_date
       attr_reader :to_date
