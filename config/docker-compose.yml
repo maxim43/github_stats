@@ -1,8 +1,5 @@
 version: '2'
 
-volumes:
-  redis-scorecard:
-
 services:
   db:
     image: postgres:12.0
