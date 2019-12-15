@@ -9,6 +9,7 @@ module Github
 
         super(user_url, created_at)
       end
+
     end
   end
 end

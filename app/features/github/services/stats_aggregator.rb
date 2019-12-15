@@ -1,12 +1,13 @@
 module Github
   module Services
-    class WeeklyCollector
+    class StatsAggregator
 
       attr_reader :pull_requests
       attr_reader :pull_request_reviews
       attr_reader :pull_requests_comments
 
-      def initialize
+      # @param stats_collector [#pull_requests] [#pull_request_reviews]  [#pull_requests_comments]
+      def initialize(stats_collector: default_stats_collector)
         @pull_requests = stats_collector.pull_requests
         @pull_request_reviews = stats_collector.pull_request_reviews
         @pull_requests_comments = stats_collector.pull_requests_comments
@@ -37,7 +38,7 @@ module Github
 
       private
 
-      def stats_collector
+      def default_stats_collector
         @stats_collector ||= Github::Services::StatsCollector.new({to_date: DateTime.current})
       end
     end

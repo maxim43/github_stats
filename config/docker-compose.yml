@@ -1,0 +1,15 @@
+version: '2'
+
+volumes:
+  redis-scorecard:
+
+services:
+  db:
+    image: postgres:12.0
+    restart: always
+    environment:
+      POSTGRES_DB: 'scorecard'
+      POSTGRES_PASSWORD: 'scorecard'
+      POSTGRES_USER: 'scorecard'
+    ports:
+      - "5432:5432"

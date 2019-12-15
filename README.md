@@ -3,22 +3,9 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+rvm_trust_rvmrcs_flag=1 put in ~/.rvmrc if you use rvm
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+bundle exec whenever --clear-crontab
+bundle exec whenever --update-crontab
