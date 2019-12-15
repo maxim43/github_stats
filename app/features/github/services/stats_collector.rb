@@ -6,27 +6,25 @@ module Github
     # SUGGESTION: Get all pull more then one week duration
     class StatsCollector
 
-      DEFAULT_REPO_NAME = 'MaksymTo/tamagotchi'
+      DEFAULT_REPO_NAME = "rails/rails"
 
       attr_reader :from_date
       attr_reader :to_date
 
-      def initialize(
-          from_date: DateTime.current.beginning_of_week - 1.week,
-          to_date: DateTime.current.beginning_of_week
-      )
+      def initialize(from_date:, to_date:)
         @from_date = from_date
         @to_date   = to_date
       end
 
       # @return Array<Github::DataHolders::UserPullRequest>
       def pull_requests
+
         @pull_requests ||= github_api
                              .pull_requests(since_date: from_date)
                              .map{ |pull_request_resp|
                                Github::DataHolders::UserPullRequest.new(pull_request: pull_request_resp)
                              }
-                             .select {|pull_request| pull_request.created_at < to_date}
+                             .select { |pull_request| pull_request.created_at < to_date }
       end
 
       # return Array<Github::DataHolders::UserReview>
