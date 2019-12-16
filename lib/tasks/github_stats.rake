@@ -20,7 +20,7 @@ namespace :github_stats do
     ]
 
     three_weeks_range.each{ |data_rage|
-      GithubUserStatistics::CollectStatsForDateRange.new(data_rage).perform!
+      UserStatistics::Github::CollectStatsForDateRange.new(data_rage).perform!
     }
     puts 'End processing "Populate users statistics for 3 weeks"'
   end
@@ -29,7 +29,7 @@ namespace :github_stats do
   task recurrent: :environment do
     puts 'Start processing "Populate users statistics for 1 weeks"'
 
-    GithubUserStatistics::CollectStatsForDateRange.new(
+    UserStatistics::Github::CollectStatsForDateRange.new(
         from_date: UserStat.user_stats_date_from,
         to_date:   UserStat.user_stats_date_to
     ).perform!

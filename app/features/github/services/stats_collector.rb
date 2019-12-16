@@ -18,7 +18,6 @@ module Github
 
       # @return Array<Github::DataHolders::UserPullRequest>
       def pull_requests
-
         @pull_requests ||= github_api
                              .pull_requests(since_date: from_date)
                              .map{ |pull_request_resp|
