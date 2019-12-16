@@ -9,19 +9,24 @@ module GithubUserStatistics
     end
 
     def perform!
-      stats_collector = Github::Services::StatsCollector.new(
-          from_date: from_date,
-          to_date: to_date
-      )
+      begin
+        stats_collector = Github::Services::StatsCollector.new(
+            from_date: from_date,
+            to_date: to_date
+        )
 
-      users_stats = Github::Services::StatsAggregator
-                        .new(stats_collector: stats_collector)
-                        .get_stats_per_user
+        users_stats = Github::Services::StatsAggregator
+                          .new(stats_collector: stats_collector)
+                          .get_stats_per_user
 
-      ActiveRecord::Base.transaction do
-        users_stats.each do |users_stat|
-          GithubUserStatistics::Create.new(users_stat, from_date.to_date).perform!
+        ActiveRecord::Base.transaction do
+          users_stats.each do |users_stat|
+            GithubUserStatistics::Create.new(users_stat, from_date.to_date).perform!
+          end
         end
+      #  TODO: Use Application logger
+      rescue => e
+        puts e
       end
     end
   end

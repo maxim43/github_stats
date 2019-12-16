@@ -3,6 +3,6 @@
  #env "GEM_HOME", '/home/maksymto/.rvm/gems/ruby-2.6.3@githubscore'
  set :output, "log/whenever.log"
 
- every :monday, at: "6:00 PM" do
+ every :monday, at: "2:00 AM" do
    rake "github_stats:recurrent"
  end
